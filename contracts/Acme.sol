@@ -51,7 +51,7 @@ contract Company is StandardReceiver {
                 return true;
             }
         }
-    // TODO: So the interfaces are still in flux a bit, 
+    // TODO: Figure out why returning false doesn't work
     //return false;
     throw;
     }

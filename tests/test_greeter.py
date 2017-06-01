@@ -38,13 +38,15 @@ def test_employee(company_contract, accounts, chain):
     assert employee_contract.call().salaryUSD() == SALARY_USD
 
 
-#@pytest.mark.skip(reason="Not actually validating the token is accepted yet")
 def test_reject_token(company_contract, token_contracts, accounts, chain, web3):
     foo, bar = token_contracts
     assert company_contract
 
-    chain.wait.for_receipt(
+    # Should this raise or just not send?
+    with pytest.raises(TransactionFailed):
+        chain.wait.for_receipt(
         foo.transact().transfer(company_contract.address, 1))
+
     # nothing should be sent
     assert foo.call().balanceOf(company_contract.address) == 0
 
