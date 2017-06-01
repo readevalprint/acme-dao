@@ -17,21 +17,26 @@ contract Company is StandardReceiver {
         owner = msg.sender;
     }
 
-    function () tokenPayable  {}
+    function () tokenPayable payable {}
 
     modifier isAdmin() { if(msg.sender != owner) throw; _; }
 
-
-    function newEmployee(address withdraw_address, uint salaryUSD) returns (address, uint) {
-        address contract_address = new Employee(withdraw_address, salaryUSD);
+    function newEmployee(address authorized_address, uint salaryUSD) returns (address, uint) {
+        address contract_address = new Employee(authorized_address, salaryUSD);
         employees.push(contract_address);
         uint id = employees.length;
         NewEmployee(id, contract_address);
         return (contract_address, id);
     }
+    //TODO removeEmployee()
 
     function getEmployee(uint id) returns (address) {
-        return employees[id];
+        return ;
+    }
+
+    function payEmployee(uint id) {
+        Employee employee = Employee(employees[id]);
+        
     }
 
     function startAcceptingToken(address token_address) {
@@ -58,15 +63,23 @@ contract Company is StandardReceiver {
 }
 
 
-contract Employee {
+contract Employee is StandardReceiver {
     address public company_address;
-    address public withdraw_address;
+    address public authorized_address;
     uint public salaryUSD;
+    address[] public accepted_token_addresses;
+    uint[] public ratios;
 
-    function Employee(address _withdraw_address, uint _salaryUSD) {
+    function () tokenPayable payable {}
+
+    function Employee(address authorized_address, uint _salaryUSD) {
         company_address = msg.sender;
-        withdraw_address = _withdraw_address;
+        authorized_address = authorized_address;
         salaryUSD = _salaryUSD;
     }
+
+    modifier isEmployee() { if(msg.sender != authorized_address) throw; _; }
+    modifier isCompany() { if(msg.sender != company_address) throw; _; }
+    // TODO set ratios once every 6 months
 
 }
