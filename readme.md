@@ -1,5 +1,16 @@
 [![Build Status](https://travis-ci.org/readevalprint/acme-dao.svg?branch=master)](https://travis-ci.org/readevalprint/acme-dao)
 
+## Table of Contents
+- [AcmeDAO](#acmedao)
+- [Goal](#goal)
+- [Usage](#usage)
+- [Development](#development)
+- [Roadmap](#roadmap)
+- [Sponsors](#sponsors)
+    + [===> $YOUR_LOGO_HERE <===](#------your-logo-here-----)
+- [Testing](#testing)
+- [MIT License](#mit-license)
+
 
 # AcmeDAO
 
