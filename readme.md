@@ -46,9 +46,7 @@ and optionally [docker-compose](https://docs.docker.com/compose/)
 # Sponsors
 
 
-##########################
-###  $YOUR_LOGO_HERE   ###
-##########################
+###  $YOUR_LOGO_HERE
 
 If you want to gain visibility for your own amazing (and possibly soon to be autonomously distributed) company please send me a message [@readevalprint](https://twitter.com/readevalprint/)
 
