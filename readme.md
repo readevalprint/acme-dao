@@ -7,7 +7,7 @@ A prototype distributed company with payouts via [ERC223 tokens](https://github.
 
 # Goal
 
-In the same way ERC20 and 23 (223 ?) have standardized how tokens are created and transfer
+In the same way ERC20 and 23 (223 ?) have standardized how tokens are created and transfered,
 AcmeDAO hopes to standardize the interfaces between companies and employees.
 
 Company:
@@ -19,7 +19,7 @@ Company:
 
 Employee:
  - Has an `authorized_address` (working title) which is the address that the employee manages their contract from
- - sets tokens they accecpt
+ - sets tokens they eccept
  - set the payout ratio between tokens ex. ETH:30%, BTC:50%, UST:20%
 
 # Usage
@@ -38,21 +38,29 @@ and optionally [docker-compose](https://docs.docker.com/compose/)
 - [x] Write initial sanity tests
 - [x] Set up CI build process
 - [x] Flesh out high level interfaces
-- [ ] Make the permissions more granual and allow the transfering ow company ownership
+- [ ] Make the permissions more granular and allow the transfering of company ownership
 - [ ] Add checks that accepted tokens between Company and Employee are valid
 - [ ] Document standardized Company, Employee contract interface
 - [ ] Make simple js UI
 
+# Sponsores
+
+$YOUR_LOGO_HERE
+
+If you want to help this project and gain visibility to your own soon to be
+autonomously distributed company please sent me a message [@readevalprint](https://twitter.com/readevalprint/)
+
+Alternatively if there is a feature that you prioritized that is not
+on the roadmap, please make an issue and I will quote you a price.
 
 # Testing
 
-The easist way is to run with docker compose. It will mount the current directory so
+The easiest way is to run with docker compose. It will mount the current directory so
 any changes will be reflected in the tests without having to rebuild the container image.
 
 ```
 docker-compose acme-dao test
 ```
-
 
 Or if you have the requirements installed on your host:
 
@@ -60,3 +68,13 @@ Or if you have the requirements installed on your host:
 py.test tests/
 ```
 
+
+# MIT License
+
+Copyright 2017 Timothy Watts (tim@readevalprint.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

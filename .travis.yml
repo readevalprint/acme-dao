@@ -4,28 +4,15 @@ sudo: required
 python:
   - "3.4"
 
-env:
-  global:
-      - CACHE_DIR=$HOME/.cache/docker
-      - CACHE_DOCKER=$CACHE_DIR/acme-dao-docker.tar.gz
-
-
 services:
   - docker
 
 cache:
   directories:
     - $HOME/.cache/pip
-    - $CACHE_DIR
-
-before_install:
-  - if [ -f ${CACHE_DOCKER} ]; then gunzip -c ${CACHE_DOCKER} | docker load; fi
 
 install:
   - docker-compose build
 
 script:
   - docker-compose run acme-dao test
-
-before_cache:
-  - if [ ! -f ${CACHE_DOCKER} ]; then docker save readevalprint/acme-dao:latest | gzip > ${CACHE_DOCKER}; fi
