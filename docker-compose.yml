@@ -1,8 +1,9 @@
 version: '2'
+
 services:
-    acme:
+    acme-dao:
         build: .
-        image: acme
+        image: acme-dao
         volumes:
             - .:/code
             - ./acme_home:/root/
