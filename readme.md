@@ -7,19 +7,22 @@ A prototype distributed company with payouts via [ERC223 tokens](https://github.
 
 
 # Development
-Built in [populous](https://github.com/pipermerriam/populus)
-Requires solc 0.4.8 until this is fixed: https://github.com/pipermerriam/populus/issues/249
-Optionally [docker-compose](https://docs.docker.com/compose/)
+Built in [populous](https://github.com/pipermerriam/populus).
+
+Requires [solc 0.4.8](https://github.com/ethereum/solidity/tree/release_0.4.8) until this is fixed: https://github.com/pipermerriam/populus/issues/249
+and optionally [docker-compose](https://docs.docker.com/compose/)
+
 
 # Testing
 
-The easist way is to run
+The easist way is to run with docker compose. It will mount the current directory so any changes will be reflected in the tests without having to rebuld the container image.
 
 ```
 docker-compose acme-dao test
 ```
 
-Or if you have the requirments instal on your host
+
+Or if you have the requirements installed on your host:
 
 ```
 py.test tests/
