@@ -3,4 +3,4 @@
 
 # AcmeDAO
 
-A prototypoe distributed company with payout over tokens
+A prototypoe distributed company with payouts via [ERC223 tokens](https://github.com/aragon/ERC23/)
