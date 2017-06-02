@@ -7,7 +7,7 @@
 - [Development](#development)
 - [Roadmap](#roadmap)
 - [Sponsors](#sponsors)
-    + [===> $YOUR_LOGO_HERE <===](#------your-logo-here-----)
+    + [===> $YOUR_LOGO_HERE <===](#sponsors)
 - [Testing](#testing)
 - [MIT License](#mit-license)
 
