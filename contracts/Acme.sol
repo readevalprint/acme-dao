@@ -89,8 +89,8 @@ contract Employee is StandardReceiver {
     }
 
     function supportsToken(address token_address) returns (bool) {
-        for (uint i = 0; i < accepted_token_addresses.length; i++) {
-            if (accepted_token_addresses[i] == token_address) {
+        for (uint i = 0; i < token_addresses.length; i++) {
+            if (token_addresses[i] == token_address) {
                 return true;
             }
         }
