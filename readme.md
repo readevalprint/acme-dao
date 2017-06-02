@@ -5,6 +5,9 @@
 
 A prototype distributed company with payouts via [ERC223 tokens](https://github.com/aragon/ERC23/)
 
+# Usage
+
+Right now, the easiest way to understand how to use it is to read the tests at `./tests/test_company.py`
 
 # Development
 Built in [populous](https://github.com/pipermerriam/populus).
