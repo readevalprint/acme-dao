@@ -1,0 +1,10 @@
+version: '2'
+services:
+    acme:
+        build: .
+        image: acme
+        volumes:
+            - .:/code
+            - ./acme_home:/root/
+        hostname: acme-dao
+
