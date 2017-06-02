@@ -15,7 +15,8 @@ and optionally [docker-compose](https://docs.docker.com/compose/)
 
 # Testing
 
-The easist way is to run with docker compose. It will mount the current directory so any changes will be reflected in the tests without having to rebuld the container image.
+The easist way is to run with docker compose. It will mount the current directory so
+any changes will be reflected in the tests without having to rebuild the container image.
 
 ```
 docker-compose acme-dao test
