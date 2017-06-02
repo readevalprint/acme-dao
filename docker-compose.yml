@@ -3,7 +3,7 @@ version: '2'
 services:
     acme-dao:
         build: .
-        image: acme-dao
+        image: readevalprint/acme-dao
         volumes:
             - .:/code
             - ./acme_home:/root/
