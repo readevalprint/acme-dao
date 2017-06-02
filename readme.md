@@ -19,7 +19,7 @@ Company:
 
 Employee:
  - Has an `authorized_address` (working title) which is the address that the employee manages their contract from
- - sets tokens they eccept
+ - sets tokens they accept
  - set the payout ratio between tokens ex. ETH:30%, BTC:50%, UST:20%
 
 # Usage
@@ -38,12 +38,12 @@ and optionally [docker-compose](https://docs.docker.com/compose/)
 - [x] Write initial sanity tests
 - [x] Set up CI build process
 - [x] Flesh out high level interfaces
-- [ ] Make the permissions more granular and allow the transfering of company ownership
+- [ ] Make the permissions more granular and allow the transferring of company ownership
 - [ ] Add checks that accepted tokens between Company and Employee are valid
 - [ ] Document standardized Company, Employee contract interface
 - [ ] Make simple js UI
 
-# Sponsores
+# Sponsors
 
 $YOUR_LOGO_HERE
 
