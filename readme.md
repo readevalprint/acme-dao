@@ -46,13 +46,11 @@ and optionally [docker-compose](https://docs.docker.com/compose/)
 # Sponsors
 
 
-```
-==========================
-===> $YOUR_LOGO_HERE <====
-==========================
-```
+##########################
+###  $YOUR_LOGO_HERE   ###
+##########################
 
-If you want to gain visibility for your own amazing soon to be autonomously distributed company please sent me a message [@readevalprint](https://twitter.com/readevalprint/)
+If you want to gain visibility for your own amazing (and possibly soon to be autonomously distributed) company please send me a message [@readevalprint](https://twitter.com/readevalprint/)
 
 Alternatively if there is a feature that you prioritize but is not
 on the roadmap, please make an issue and youre requirement and I will quote you a price.
