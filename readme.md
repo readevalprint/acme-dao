@@ -46,17 +46,17 @@ and optionally [docker-compose](https://docs.docker.com/compose/)
 # Sponsors
 
 
-###  $YOUR_LOGO_HERE
+### ===> $YOUR_LOGO_HERE <===
 
-If you want to gain visibility for your own amazing (and possibly soon to be autonomously distributed) company please send me a message [@readevalprint](https://twitter.com/readevalprint/)
+If you want to gain visibility for your own amazing (and possibly soon to be autonomously distributed) company, please send me a message [@readevalprint](https://twitter.com/readevalprint/)
 
-Alternatively if there is a feature that you prioritize but is not
-on the roadmap, please make an issue and youre requirement and I will quote you a price.
+Alternatively, if there is a feature that you prioritize but is not listed
+on the roadmap, please make an issue and your requirements and I will quote you a price.
 
 # Testing
 
-The easiest way is to run with docker compose. It will mount the current directory so
-any changes will be reflected in the tests without having to rebuild the container image.
+The easiest way toe run the testsuit is with docker-compose. It will automatically mount the current directory so
+any changes will be reflected in the tests without having to rebuild the container image. Read the [docker-compose.yml](./docker-compose.yaml)
 
 ```
 docker-compose acme-dao test
