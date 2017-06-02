@@ -24,7 +24,7 @@ Employee:
 
 # Usage
 
-Right now, the easiest way to understand how to use it is to read the tests at [./tests/test_company.py](./test/test_company.py)
+Right now, the easiest way to understand how to use it is to read the tests at [./tests/test_company.py](./tests/test_company.py)
 
 # Development
 Built in [populous](https://github.com/pipermerriam/populus).
