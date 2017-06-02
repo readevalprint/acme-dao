@@ -24,7 +24,7 @@ Employee:
 
 # Usage
 
-Right now, the easiest way to understand how to use it is to read the tests at `./tests/test_company.py`
+Right now, the easiest way to understand how to use it is to read the tests at [./tests/test_company.py](./test/test_company.py)
 
 # Development
 Built in [populous](https://github.com/pipermerriam/populus).
@@ -56,7 +56,7 @@ on the roadmap, please make an issue and your requirements and I will quote you 
 # Testing
 
 The easiest way toe run the testsuit is with docker-compose. It will automatically mount the current directory so
-any changes will be reflected in the tests without having to rebuild the container image. Read the [docker-compose.yml](./docker-compose.yaml)
+any changes will be reflected in the tests without having to rebuild the container image. Read the [docker-compose.yml](./docker-compose.yml)
 
 ```
 docker-compose acme-dao test
