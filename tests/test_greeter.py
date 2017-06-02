@@ -34,7 +34,7 @@ def test_employee(company_contract, accounts, chain):
 
     # Assert all the things
     assert employee_contract.call().company_address() == company_contract.address
-    assert employee_contract.call().withdraw_address() == employee_address
+    assert employee_contract.call().employee_address() == employee_address
     assert employee_contract.call().salaryUSD() == SALARY_USD
 
 

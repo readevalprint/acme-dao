@@ -31,17 +31,21 @@ contract Company is StandardReceiver {
     //TODO removeEmployee()
 
     function getEmployee(uint id) returns (address) {
-        return ;
+        return employees[id];
     }
 
     function payEmployee(uint id) {
         Employee employee = Employee(employees[id]);
-        
+        // TODO: verify that the company can payout all the tokens 
+        // that the employe accepts.
+        // Check the emploee has set their percents
+
     }
 
     function startAcceptingToken(address token_address) {
         token_addresses.push(token_address);
     }
+
     function stopAcceptingToken(address token_address) {
         for (uint i = 0; i < token_addresses.length; i++) {
             if (token_addresses[i] == token_address) {
@@ -56,30 +60,46 @@ contract Company is StandardReceiver {
                 return true;
             }
         }
-    // TODO: Figure out why returning false doesn't work
-    //return false;
-    throw;
+        // TODO: Figure out why returning false doesn't work
+        //return false;
+        throw;
     }
 }
 
 
 contract Employee is StandardReceiver {
     address public company_address;
-    address public authorized_address;
+    address public employee_address;
     uint public salaryUSD;
-    address[] public accepted_token_addresses;
-    uint[] public ratios;
+    uint[] public token_percents;
+    address[] public token_addresses;
+    address[] public recieved_token_addresses;
 
-    function () tokenPayable payable {}
+    modifier isEmployee() { if(msg.sender != employee_address) throw; _; }
+    modifier isCompany() { if(msg.sender != company_address) throw; _; }
 
-    function Employee(address authorized_address, uint _salaryUSD) {
+    function () tokenPayable payable {
+        // TODO add the token address to recieved tokens
+    }
+
+    function Employee(address _employee_address, uint _salaryUSD) {
         company_address = msg.sender;
-        authorized_address = authorized_address;
+        employee_address = _employee_address;
         salaryUSD = _salaryUSD;
     }
 
-    modifier isEmployee() { if(msg.sender != authorized_address) throw; _; }
-    modifier isCompany() { if(msg.sender != company_address) throw; _; }
+    function supportsToken(address token_address) returns (bool) {
+        for (uint i = 0; i < accepted_token_addresses.length; i++) {
+            if (accepted_token_addresses[i] == token_address) {
+                return true;
+            }
+        }
+        // TODO: Figure out why returning false doesn't work
+        //return false;
+        throw;
+    }
+
+    // TODO: withdraw(address token, address _to)
     // TODO set ratios once every 6 months
 
 }
