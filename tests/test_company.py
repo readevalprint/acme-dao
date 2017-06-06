@@ -65,3 +65,6 @@ def test_accept_token(company_contract, token_contracts, accounts, chain, web3):
 
     assert foo.call().balanceOf(company_contract.address) == 1
 
+
+def test_paying_employee(company_contract, accounts, chain):
+    assert company_contract

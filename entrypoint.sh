@@ -27,7 +27,7 @@ case "$1" in
     test)
         cd /code/
         source /var/env/bin/activate
-	py.test tests/
+	py.test tests/ "${@:2}"
         cat << "EOF"
   ____                 _     _       _     _
  / ___| ___   ___   __| |   (_) ___ | |__ | |

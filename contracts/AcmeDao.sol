@@ -28,6 +28,7 @@ contract Company is StandardReceiver {
         NewEmployee(id, contract_address);
         return (contract_address, id);
     }
+
     //TODO removeEmployee()
 
     function getEmployee(uint id) returns (address) {
@@ -36,13 +37,17 @@ contract Company is StandardReceiver {
 
     function payEmployee(uint id) {
         Employee employee = Employee(employees[id]);
-        // TODO: verify that the company can payout all the tokens 
-        // that the employe accepts.
-        // Check the emploee has set their percents
-
+        // TODO: verify that the company can payout all the tokens that the employee accepts.
+        // TODO: Check the emploee has set their percents
+        for (uint i = 0; i < employee.token_percents.length; i++) {
+            // TODO: check that Company has suffecient funds to pay employee
+            //pct = ((employee.salaryUSD * 1000) / 12) / employee.token_percents[i];
+            //employee.token_addresses[i].transfer(pct);
+        }
     }
 
     function startAcceptingToken(address token_address) {
+        // TODO: perhaps this should be a mapping
         token_addresses.push(token_address);
     }
 
@@ -68,12 +73,13 @@ contract Company is StandardReceiver {
 
 
 contract Employee is StandardReceiver {
+    // Employees control their own contract so they can witdraw even if it's terminated
     address public company_address;
     address public employee_address;
     uint public salaryUSD;
     uint[] public token_percents;
     address[] public token_addresses;
-    address[] public recieved_token_addresses;
+    address[] public recieved_tokens;
 
     modifier isEmployee() { if(msg.sender != employee_address) throw; _; }
     modifier isCompany() { if(msg.sender != company_address) throw; _; }

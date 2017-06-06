@@ -1,5 +1,6 @@
 pragma solidity ^0.4.8;
 
+// These are just to test the accepting and sending okens.
 
 import "./ERC23/implementation/Standard23Token.sol";
 
