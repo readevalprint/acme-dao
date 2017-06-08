@@ -47,6 +47,8 @@ contract Company is StandardReceiver {
         uint amt;
         uint l = employee.getTokenAddressesLength();
         for (uint i = 0; i < l; i++) {
+            // TODO: this is super naive, needs to check last time the employee 
+            // was paid and how much is remaining for them to withdraw.
             token_address = employee.token_addresses(i);
             amt = employee.token_amounts(i);
             ERC23 t = ERC23( token_address);
@@ -93,7 +95,7 @@ contract Employee is StandardReceiver {
 
     // TODO: set to isCompany() modifier
     function setAddresseAmount(address _address, uint amt) {
-        // This too is super naive, need to do some extream validation on this.
+        // This too is super naive, need to do some extreme validation on this.
         // But ok to test flow for now.
         token_addresses.push(_address);
         token_amounts.push(amt);
