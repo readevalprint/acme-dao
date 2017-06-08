@@ -2,6 +2,7 @@ pragma solidity ^0.4.8;
 
 
 import "./ERC23/implementation/StandardReceiver.sol";
+import "./ERC23/interface/ERC23.sol";
 
 contract Company is StandardReceiver {
 
@@ -17,7 +18,11 @@ contract Company is StandardReceiver {
         owner = msg.sender;
     }
 
-    function () tokenPayable payable {}
+    function () tokenPayable payable {
+        if(tkn.addr != 0) {
+            token_addresses.push(tkn.addr);
+        }
+    }
 
     modifier isAdmin() { if(msg.sender != owner) throw; _; }
 
@@ -35,39 +40,24 @@ contract Company is StandardReceiver {
         return employees[id];
     }
 
-    function payEmployee(uint id) {
-        Employee employee = Employee(employees[id]);
-        // TODO: verify that the company can payout all the tokens that the employee accepts.
-        // TODO: Check the emploee has set their percents
-        for (uint i = 0; i < employee.token_percents.length; i++) {
-            // TODO: check that Company has suffecient funds to pay employee
-            //pct = ((employee.salaryUSD * 1000) / 12) / employee.token_percents[i];
-            //employee.token_addresses[i].transfer(pct);
+    function payEmployee(uint id) returns (bool) {
+        address employee_address = employees[id];
+        Employee employee = Employee(employee_address);
+        address token_address;
+        uint amt;
+        uint l = employee.getTokenAddressesLength();
+        for (uint i = 0; i < l; i++) {
+            token_address = employee.token_addresses(i);
+            amt = employee.token_amounts(i);
+            ERC23 t = ERC23( token_address);
+            t.transfer(employee_address, amt);
         }
+        return true;
     }
 
-    function startAcceptingToken(address token_address) {
-        // TODO: perhaps this should be a mapping
-        token_addresses.push(token_address);
-    }
-
-    function stopAcceptingToken(address token_address) {
-        for (uint i = 0; i < token_addresses.length; i++) {
-            if (token_addresses[i] == token_address) {
-                delete token_addresses[i];
-            }
-        }
-    }
 
     function supportsToken(address token_address) returns (bool) {
-        for (uint i = 0; i < token_addresses.length; i++) {
-            if (token_addresses[i] == token_address) {
-                return true;
-            }
-        }
-        // TODO: Figure out why returning false doesn't work
-        //return false;
-        throw;
+        return true;
     }
 }
 
@@ -77,7 +67,7 @@ contract Employee is StandardReceiver {
     address public company_address;
     address public employee_address;
     uint public salaryUSD;
-    uint[] public token_percents;
+    uint[] public token_amounts;
     address[] public token_addresses;
     address[] public recieved_tokens;
 
@@ -85,7 +75,14 @@ contract Employee is StandardReceiver {
     modifier isCompany() { if(msg.sender != company_address) throw; _; }
 
     function () tokenPayable payable {
-        // TODO add the token address to recieved tokens
+        if(tkn.addr != 0) {
+            recieved_tokens.push(tkn.addr);
+        }
+    }
+
+    function getTokenAddressesLength() constant returns (uint) {
+        // Grrr why is everything painful in solidity.
+        return token_addresses.length;
     }
 
     function Employee(address _employee_address, uint _salaryUSD) {
@@ -94,18 +91,17 @@ contract Employee is StandardReceiver {
         salaryUSD = _salaryUSD;
     }
 
-    function supportsToken(address token_address) returns (bool) {
-        for (uint i = 0; i < token_addresses.length; i++) {
-            if (token_addresses[i] == token_address) {
-                return true;
-            }
-        }
-        // TODO: Figure out why returning false doesn't work
-        //return false;
-        throw;
+    // TODO: set to isCompany() modifier
+    function setAddresseAmount(address _address, uint amt) {
+        // This too is super naive, need to do some extream validation on this.
+        // But ok to test flow for now.
+        token_addresses.push(_address);
+        token_amounts.push(amt);
     }
-
+    function supportsToken(address token_address) returns (bool) {
+        return true;
+    }
     // TODO: withdraw(address token, address _to)
-    // TODO set ratios once every 6 months
+    // TODO set amounts once every 6 months
 
 }

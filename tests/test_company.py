@@ -21,7 +21,8 @@ def token_contracts(chain):
     return FooFactory(address=foo_contract_address), BarFactory(address=bar_contract_address)
 
 
-def test_employee(company_contract, accounts, chain):
+def test_employee(company_contract, accounts, chain, token_contracts):
+    foo, bar = token_contracts
     assert company_contract
     employee_address = accounts[1]
     SALARY_USD = 100000
@@ -38,33 +39,48 @@ def test_employee(company_contract, accounts, chain):
     assert employee_contract.call().salaryUSD() == SALARY_USD
 
 
-def test_reject_token(company_contract, token_contracts, accounts, chain, web3):
-    foo, bar = token_contracts
-    assert company_contract
-
-    # Should this raise or just not send?
-    with pytest.raises(TransactionFailed):
-        chain.wait.for_receipt(
-        foo.transact().transfer(company_contract.address, 1))
-
-    # nothing should be sent
-    assert foo.call().balanceOf(company_contract.address) == 0
-
-
 def test_accept_token(company_contract, token_contracts, accounts, chain, web3):
     foo, bar = token_contracts
     assert company_contract
 
     assert foo.call().balanceOf(company_contract.address) == 0
-
-    chain.wait.for_receipt(
-        company_contract.transact().startAcceptingToken(foo.address))
-
-    chain.wait.for_receipt(
-        foo.transact().transfer(company_contract.address, 1))
-
+    chain.wait.for_receipt( foo.transact().transfer(company_contract.address, 1))
     assert foo.call().balanceOf(company_contract.address) == 1
 
+    employee_address = accounts[1]
+    SALARY_USD = 100000
+    tx = company_contract.transact().newEmployee(employee_address, SALARY_USD)
+    chain.wait.for_receipt(tx)
 
-def test_paying_employee(company_contract, accounts, chain):
+    employee_contract_address = company_contract.call().getEmployee(0)
+    EmployeeFactory = chain.provider.get_base_contract_factory('Employee')
+    employee_contract = EmployeeFactory(address=employee_contract_address)
+
+
+    # Test paying employee contract directly
+    assert foo.call().balanceOf(employee_contract.address) == 0
+    chain.wait.for_receipt( foo.transact().transfer(employee_contract.address, 1))
+    assert foo.call().balanceOf(employee_contract.address) == 1
+
+
+def test_paying_employee(company_contract, token_contracts, accounts, chain, web3):
+    foo, bar = token_contracts
+    chain.wait.for_receipt( foo.transact().transfer(company_contract.address, 10))
+    assert foo.call().balanceOf(company_contract.address) == 10
     assert company_contract
+    employee_address = accounts[1]
+    SALARY_USD = 100000
+    tx = company_contract.transact().newEmployee(employee_address, SALARY_USD)
+    chain.wait.for_receipt(tx)
+
+    employee_contract_address = company_contract.call().getEmployee(0)
+    EmployeeFactory = chain.provider.get_base_contract_factory('Employee')
+    employee_contract = EmployeeFactory(address=employee_contract_address)
+
+    chain.wait.for_receipt(employee_contract.transact().setAddresseAmount(foo.address,2))
+    chain.wait.for_receipt(company_contract.transact().payEmployee(0))
+    assert foo.call().balanceOf(company_contract.address) == 8
+    assert foo.call().balanceOf(employee_contract_address) == 2
+
+
+
